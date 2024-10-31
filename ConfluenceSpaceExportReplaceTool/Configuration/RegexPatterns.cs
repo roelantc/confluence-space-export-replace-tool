@@ -1,6 +1,4 @@
-using System.Text.RegularExpressions;
-
-namespace ConfluenceSpaceExportReplaceTool.Constants;
+namespace ConfluenceSpaceExportReplaceTool.Configuration;
 
 internal static class RegexPatterns
 {

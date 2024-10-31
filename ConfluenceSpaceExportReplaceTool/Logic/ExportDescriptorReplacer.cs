@@ -1,4 +1,4 @@
-namespace ConfluenceSpaceExportReplaceTool.Replacers;
+namespace ConfluenceSpaceExportReplaceTool.Logic;
 
 internal static class ExportDescriptorPropertiesReplacer
 {
