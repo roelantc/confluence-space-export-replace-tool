@@ -18,13 +18,13 @@ internal static partial class Program
             return;
         }
         
-        if (!zipFilePath.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+        if (IsNotAZipFile(zipFilePath))
         {
             Console.WriteLine("Invalid zip file provided");
             return;
         }
 
-        if (!File.Exists(zipFilePath))
+        if (DoesFileNotExist(zipFilePath))
         {
             Console.WriteLine("Zip file provided does not exist");
             return;
@@ -40,7 +40,7 @@ internal static partial class Program
             return;
         }
 
-        if (!SpaceKeyRegex().IsMatch(oldSpaceKey))
+        if (IsInvalidSpaceKey(oldSpaceKey))
         {
             Console.WriteLine("Old space key is invalid and should be composed of only alphanumeric characters (a-z, A-Z, 0-9) and should be no more than 255 characters in length");
             return;
@@ -56,7 +56,7 @@ internal static partial class Program
             return;
         }
 
-        if (!SpaceKeyRegex().IsMatch(newSpaceKey))
+        if (IsInvalidSpaceKey(newSpaceKey))
         {
             Console.WriteLine("New space key is invalid and should be composed of only alphanumeric characters (a-z, A-Z, 0-9) and should be no more than 255 characters in length");
             return;
@@ -68,6 +68,21 @@ internal static partial class Program
 
         Console.WriteLine($"Your Confluence space import zip file can be found here: {Path.GetFullPath(confluenceSpaceImportZip)}");
         Console.ReadLine();
+    }
+
+    private static bool IsInvalidSpaceKey(string spaceKey)
+    {
+        return !SpaceKeyRegex().IsMatch(spaceKey);
+    }
+
+    private static bool DoesFileNotExist(string filePath)
+    {
+        return !File.Exists(filePath);
+    }
+
+    private static bool IsNotAZipFile(string filePath)
+    {
+        return !filePath.EndsWith(".zip", StringComparison.OrdinalIgnoreCase);
     }
 
     [GeneratedRegex(RegexPatterns.SpaceKeyRegexPattern)]
